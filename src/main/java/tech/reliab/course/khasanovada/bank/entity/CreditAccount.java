@@ -1,158 +1,128 @@
 package tech.reliab.course.khasanovada.bank.entity;
 
-import tech.reliab.course.khasanovada.bank.service.impl.CreditAccountService;
 
-public class CreditAccount implements CreditAccountService {
+import java.time.LocalDate;
+
+public class CreditAccount {
     private int id;
     private int idUser;
     private int idBank;
-    private String loanStartDate;
-    private String loanEndDate;
-    private int loanLongInMonths;
+    private LocalDate loanStartDate;
+    private LocalDate loanEndDate;
+    private long loanLongInMonths;
     private int creditAmount;
-    private int monthlyPayment;
+    private double monthlyPayment;
     private int interestRate;
     private int idEmployee;
     private int idPaymentAccount;
 
-    public CreditAccount(int id, int idUser, int idBank, String loanStartDate, String loanEndDate, int loanLongInMonths, int creditAmount, int monthlyPayment, int interestRate, int idEmployee, int idPaymentAccount) {
-        this.id = id;
-        this.idUser = idUser;
-        this.idBank = idBank;
-        this.loanStartDate = loanStartDate;
-        this.loanEndDate = loanEndDate;
-        this.loanLongInMonths = loanLongInMonths;
-        this.creditAmount = creditAmount;
-        this.monthlyPayment = monthlyPayment;
-        this.interestRate = interestRate;
-        this.idEmployee = idEmployee;
-        this.idPaymentAccount = idPaymentAccount;
-    }
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
 
-    @Override
     public int getIdUser() {
         return idUser;
     }
 
-    @Override
     public void setIdUser(int idUser) {
         this.idUser = idUser;
     }
 
-    @Override
     public int getIdBank() {
         return idBank;
     }
 
-    @Override
     public void setIdBank(int idBank) {
         this.idBank = idBank;
     }
 
-    @Override
-    public String getLoanStartDate() {
+    public LocalDate getLoanStartDate() {
         return loanStartDate;
     }
 
-    @Override
-    public void setLoanStartDate(String loanStartDate) {
-        this.loanStartDate = loanStartDate;
-    }
-
-    @Override
-    public String getLoanEndDate() {
+    public LocalDate getLoanEndDate() {
         return loanEndDate;
     }
 
-    @Override
-    public void setLoanEndDate(String loanEndDate) {
+    public void setLoanStartDate(LocalDate loanStartDate) {
+        this.loanStartDate = loanStartDate;
+    }
+
+    public void setLoanEndDate(LocalDate loanEndDate) {
         this.loanEndDate = loanEndDate;
     }
 
-    @Override
-    public int getLoanLongInMonths() {
-        return loanLongInMonths;
-    }
-
-    @Override
-    public void setLoanLongInMonths(int loanLongInMonths) {
+    public void setLoanLongInMonths(long loanLongInMonths) {
         this.loanLongInMonths = loanLongInMonths;
     }
 
-    @Override
+    public long getLoanLongInMonths() {
+        return loanLongInMonths;
+    }
+
+
     public int getCreditAmount() {
         return creditAmount;
     }
 
-    @Override
     public void setCreditAmount(int creditAmount) {
         this.creditAmount = creditAmount;
     }
 
-    @Override
-    public int getMonthlyPayment() {
+    public double getMonthlyPayment() {
         return monthlyPayment;
     }
 
-    @Override
-    public void setMonthlyPayment(int monthlyPayment) {
+    public void setMonthlyPayment(double monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
 
-    @Override
     public int getInterestRate() {
         return interestRate;
     }
 
-    @Override
     public void setInterestRate(int interestRate) {
         this.interestRate = interestRate;
     }
 
-    @Override
     public int getIdEmployee() {
         return idEmployee;
     }
 
-    @Override
+
     public void setIdEmployee(int idEmployee) {
         this.idEmployee = idEmployee;
     }
 
-    @Override
+
     public int getIdPaymentAccount() {
         return idPaymentAccount;
     }
 
-    @Override
     public void setIdPaymentAccount(int idPaymentAccount) {
         this.idPaymentAccount = idPaymentAccount;
     }
 
+
     @Override
-    public void printCreditAccount() {
-        System.out.println("CreditAccount");
-        System.out.println("id=" + id);
-        System.out.println("idUser=" + idUser);
-        System.out.println("idBank=" + idBank);
-        System.out.println("loanStartDate='" + loanStartDate + '\'');
-        System.out.println("loanEndDate='" + loanEndDate + '\'');
-        System.out.println("loanLongInMonths=" + loanLongInMonths);
-        System.out.println("creditAmount=" + creditAmount);
-        System.out.println("monthlyPayment=" + monthlyPayment);
-        System.out.println("interestRate=" + interestRate);
-        System.out.println("idEmployee=" + idEmployee);
-        System.out.println("idPaymentAccount=" + idPaymentAccount);
-        System.out.println();
+    public String toString() {
+        return "CreditAccount{" +
+                "id=" + id +
+                ", idUser=" + idUser +
+                ", idBank=" + idBank +
+                ", loanStartDate='" + loanStartDate + '\'' +
+                ", loanEndDate='" + loanEndDate + '\'' +
+                ", loanLongInMonths=" + loanLongInMonths +
+                ", creditAmount=" + creditAmount +
+                ", monthlyPayment=" + monthlyPayment +
+                ", interestRate=" + interestRate +
+                ", idEmployee=" + idEmployee +
+                ", idPaymentAccount=" + idPaymentAccount +
+                '}';
     }
 }
