@@ -12,11 +12,10 @@ import java.time.temporal.ChronoUnit;
 public interface CreditAccountService {
     /* создание кредитного счета*/
     public CreditAccount createCreditAccount(int idUser, int idBank, LocalDate loanStartDate, LocalDate loanEndDate,
-                                             int creditAmount, int idEmployee, int idPaymentAccount,
-                                             BankServiceImpl bankService, UserServiceImpl userService);
+                                             int creditAmount, int idEmployee, int idPaymentAccount);
 
     /* добавляет кредитный счет в список клиента, которому принадлежит*/
-    public void addCreditAccount(UserServiceImpl userService, int idUser, int idCreditAccount);
+    public void addCreditAccount( int idUser, int idCreditAccount);
 
     /* возвращает количество месяцев между началом и концом кредита*/
     public long getMonthsBetween(LocalDate startDate, LocalDate endDate);

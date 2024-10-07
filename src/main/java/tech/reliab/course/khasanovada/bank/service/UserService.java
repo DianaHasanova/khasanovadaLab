@@ -11,8 +11,7 @@ public interface UserService {
     static final int MAX_SALARY_AMOUNT = 10000;
 
     /* добавление клиена */
-    public User createUser(String fullName, String dateOfBirth, String placeOfWork, ArrayList<Integer> arrayOfIdBanks,
-                           BankServiceImpl bankService);
+    public User createUser(String fullName, String dateOfBirth, String placeOfWork, ArrayList<Integer> arrayOfIdBanks);
 
     /* возвращает рандомно сгенерированную сумму, но не более 10 000*/
     public int givesRandomSalaryAmount();
@@ -22,7 +21,11 @@ public interface UserService {
     int givesRandomRating(int salaryAmount);
 
     /* увеличивает количество пользователей на 1 в банках, в которых находится пользователь*/
-    public void addUserToBanks(ArrayList<Integer> arrayOfIdBanks, BankServiceImpl bankService);
+    public void addUserToBanks(ArrayList<Integer> arrayOfIdBanks);
+
+    /*добавляет банк в список банков, которыми пользуется пользователь, и увеличивает
+      в этом банке количество пользователей на 1 */
+    public void addBankOfListUser(User user, int idBank);
 
     /* возвращает клиента по id */
     public User givesUserById(int idUser);

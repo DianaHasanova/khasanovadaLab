@@ -5,19 +5,23 @@ import tech.reliab.course.khasanovada.bank.entity.BankOffice;
 import tech.reliab.course.khasanovada.bank.service.BankOfficeService;
 import tech.reliab.course.khasanovada.bank.service.BankService;
 
-import java.util.ArrayList;
+
 import java.util.Random;
 
 public class BankOfficeServiceImpl implements BankOfficeService {
-    ArrayList<BankOffice> offices = new ArrayList<>();
+    BankServiceImpl bankService;
+
+    public BankOfficeServiceImpl(BankServiceImpl bankService) {
+        this.bankService = bankService;
+    }
 
     @Override
     public BankOffice createOffice(String name, String address, int idBank, boolean isStatusOfJob,
                                    boolean canAtmPlacement, boolean canGetLoan, boolean canTakeMoney,
-                                   boolean canDepositAllowed, int costOfRent, BankServiceImpl bankService ) {
+                                   boolean canDepositAllowed, int costOfRent ) {
         BankOffice office = new BankOffice();
-        office.setId(offices.size());
-        offices.add(office);
+        office.setId(bankService.offices.size());
+        bankService.offices.add(office);
         Bank bank = bankService.givesBankById(idBank);
         bankService.addOffice(bank);
 
@@ -42,7 +46,7 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
     @Override
     public BankOffice givesOfficeById(int id) {
-        for (BankOffice office : offices)
+        for (BankOffice office : bankService.offices)
             if (office.getId() == id)
                 return office;
         return null;
@@ -55,14 +59,14 @@ public class BankOfficeServiceImpl implements BankOfficeService {
 
     @Override
     public void deleteOfOffice(int index) {
-        offices.remove(index);
+        bankService.offices.remove(index);
     }
 
     @Override
     public String toString() {
         String str = "BankOfficeServiceImpl{\n";
         int indexDelete = 0;
-        for (BankOffice office : offices) {
+        for (BankOffice office : bankService.offices) {
             str += "indexDelete = " + indexDelete++ + " ";
             str += office.toString() + "\n";
         }

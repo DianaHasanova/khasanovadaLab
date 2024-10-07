@@ -8,14 +8,18 @@ import tech.reliab.course.khasanovada.bank.service.EmployeeService;
 import java.util.ArrayList;
 
 public class EmployeeServiceImpl implements EmployeeService {
-    ArrayList<Employee> employees = new ArrayList<>();
+    BankServiceImpl bankService;
+
+    public EmployeeServiceImpl(BankServiceImpl bankService) {
+        this.bankService = bankService;
+    }
 
     @Override
     public Employee createEmployee(String fullName, String dateOfBirth, String position, int idBank,
-                                   boolean isOfficeJob, int idBankOffice, boolean canGiveLoan, int salaryAmount, BankServiceImpl bankService) {
+                                   boolean isOfficeJob, int idBankOffice, boolean canGiveLoan, int salaryAmount) {
         Employee employee = new Employee();
-        employee.setId(employees.size());
-        employees.add(employee);
+        employee.setId(bankService.employees.size());
+        bankService.employees.add(employee);
         Bank bank = bankService.givesBankById(idBank);
         bankService.addEmployee(bank);
 
@@ -31,18 +35,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     public void deleteEmployee(int index) {
-        employees.remove(index);
-    }
-
-    @Override
-    public String toString() {
-        String str = "EmployeeServiceImpl{\n";
-        int indexDelete = 0;
-        for (Employee employee : employees) {
-            str += "indexDelete = " + indexDelete++ + " ";
-            str += employee.toString() + "\n";
-        }
-        str += '}';
-        return str;
+        bankService.employees.remove(index);
     }
 }

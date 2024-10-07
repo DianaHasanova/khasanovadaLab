@@ -10,15 +10,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class AtmServiceImpl implements AtmService {
-    ArrayList<BankAtm> atms = new ArrayList<>();
+    BankServiceImpl bankService;
+    BankOfficeServiceImpl officeService;
+
+    public AtmServiceImpl(BankServiceImpl bankService, BankOfficeServiceImpl officeService) {
+        this.bankService = bankService;
+        this.officeService = officeService;
+    }
+
 
     @Override
     public BankAtm createAtm(String name, WorkStatus workStatus, int idBank, int idOffice, int idEmployee,
-                             boolean isDispensingCash, boolean canDepositAllowed, int atmMaintenanceCost,
-                             BankServiceImpl bankService, BankOfficeServiceImpl officeService) {
+                             boolean isDispensingCash, boolean canDepositAllowed, int atmMaintenanceCost) {
         BankAtm atm = new BankAtm();
-        atm.setId(atms.size());
-        atms.add(atm);
+        atm.setId(bankService.atms.size());
+        bankService.atms.add(atm);
         Bank bank = bankService.givesBankById(idBank);
         bankService.addATM(bank);
         BankOffice office = officeService.givesOfficeById(idOffice);
@@ -38,20 +44,8 @@ public class AtmServiceImpl implements AtmService {
     }
 
     @Override
-    public String toString() {
-        String str = "AtmServiceImpl{\n";
-        int indexDelete = 0;
-        for (BankAtm atm : atms) {
-            str += "indexDelete = " + indexDelete++ + " ";
-            str += atm.toString() + "\n";
-        }
-        str += '}';
-        return str;
-    }
-
-    @Override
     public void deleteAtm(int index) {
-        atms.remove(index);
+        bankService.atms.remove(index);
     }
 
     @Override

@@ -10,20 +10,25 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class CreditAccountServiceImpl implements CreditAccountService {
-    ArrayList<CreditAccount> creditAccounts = new ArrayList<>();
+    BankServiceImpl bankService;
+    UserServiceImpl userService;
+
+    public CreditAccountServiceImpl(BankServiceImpl bankService, UserServiceImpl userService) {
+        this.bankService = bankService;
+        this.userService = userService;
+    }
 
     @Override
     public CreditAccount createCreditAccount(int idUser, int idBank, LocalDate loanStartDate, LocalDate loanEndDate,
-                                             int creditAmount, int idEmployee, int idPaymentAccount,
-                                             BankServiceImpl bankService, UserServiceImpl userService) {
+                                             int creditAmount, int idEmployee, int idPaymentAccount) {
         CreditAccount account = new CreditAccount();
-        int id = creditAccounts.size();
+        int id = bankService.creditAccounts.size();
         account.setId(id);
-        creditAccounts.add(account);
+        bankService.creditAccounts.add(account);
         Bank bank = bankService.givesBankById(idBank);
 
         account.setIdUser(idUser);
-        this.addCreditAccount(userService, idUser, id);
+        this.addCreditAccount(idUser, id);
         account.setIdBank(idBank);
         account.setLoanStartDate(loanStartDate);
         account.setLoanEndDate(loanEndDate);
@@ -38,11 +43,15 @@ public class CreditAccountServiceImpl implements CreditAccountService {
         account.setIdEmployee(idEmployee);
         account.setIdPaymentAccount(idPaymentAccount);
 
+        User user = userService.givesUserById(idUser);
+        if (!user.getArrayOfIdBanks().contains(idBank))
+            userService.addBankOfListUser(user, idBank);
+
         return account;
     }
 
     @Override
-    public void addCreditAccount(UserServiceImpl userService, int idUser, int idCreditAccount) {
+    public void addCreditAccount(int idUser, int idCreditAccount) {
         User user = userService.givesUserById(idUser);
         userService.addCreditAccount(user, idCreditAccount);
     }
@@ -66,7 +75,7 @@ public class CreditAccountServiceImpl implements CreditAccountService {
     public String toString() {
         String str = "CreditAccountServiceImpl{\n";
         int indexDelete = 0;
-        for (CreditAccount creditAccount : creditAccounts) {
+        for (CreditAccount creditAccount : bankService.creditAccounts) {
             str += "indexDelete = " + indexDelete++ + " ";
             str += creditAccount.toString() + "\n";
         }
@@ -76,6 +85,6 @@ public class CreditAccountServiceImpl implements CreditAccountService {
 
     @Override
     public void deleteCreditAccount(int index) {
-        creditAccounts.remove(index);
+        bankService.creditAccounts.remove(index);
     }
 }

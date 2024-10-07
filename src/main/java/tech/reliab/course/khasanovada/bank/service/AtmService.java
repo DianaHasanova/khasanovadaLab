@@ -1,19 +1,15 @@
 package tech.reliab.course.khasanovada.bank.service;
 
-import tech.reliab.course.khasanovada.bank.entity.Bank;
-import tech.reliab.course.khasanovada.bank.entity.BankAtm;
-import tech.reliab.course.khasanovada.bank.entity.BankOffice;
-import tech.reliab.course.khasanovada.bank.entity.WorkStatus;
-import tech.reliab.course.khasanovada.bank.service.impl.BankOfficeServiceImpl;
-import tech.reliab.course.khasanovada.bank.service.impl.BankServiceImpl;
 
-import java.util.Random;
+import tech.reliab.course.khasanovada.bank.entity.BankAtm;
+import tech.reliab.course.khasanovada.bank.entity.WorkStatus;
+
+
 
 public interface AtmService {
     /* создание банкомата */
     public BankAtm createAtm(String name, WorkStatus workStatus, int idBank, int idOffice, int idEmployee,
-                             boolean isDispensingCash, boolean canDepositAllowed, int atmMaintenanceCost,
-                             BankServiceImpl bankService, BankOfficeServiceImpl officeService);
+                             boolean isDispensingCash, boolean canDepositAllowed, int atmMaintenanceCost);
 
     /* удаление банкомата */
     public void deleteAtm(int index);

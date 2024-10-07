@@ -1,6 +1,6 @@
 package tech.reliab.course.khasanovada.bank.service;
 
-import tech.reliab.course.khasanovada.bank.entity.Bank;
+import tech.reliab.course.khasanovada.bank.entity.*;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public interface BankService {
 
 
     /* создание объекта банк */
-    public Bank createBank(String name);
+    Bank createBank(String name);
 
     /* увеличивает количество офисов */
     void addOffice(Bank bank);
@@ -40,4 +40,25 @@ public interface BankService {
 
     /* возвращает банк по id*/
     public Bank givesBankById(int id);
+
+    /*дает все банки в виде строки*/
+     String toStringBanks();
+
+    /*дает все офисы в виде строки*/
+    public String toStringOffices(int idBank);
+
+    /*дает всех клиентов в виде строки*/
+    public String toStringUsers(int idBank) ;
+
+    /*дает всех работников в виде строки*/
+    public String toStringEmployees(int idBank) ;
+
+    /*дает все банкоматы в виде строки*/
+    public String toStringAtms(int idBank) ;
+
+    /*дает все платежные счета в виде строки*/
+    public String toStringPaymentAccounts(int idUser);
+
+    /*дает все кредитные счета в виде строки*/
+    public String toStringCreditAccount(int idUser);
 }

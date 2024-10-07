@@ -45,6 +45,10 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public void addIdBankInArrayBanksOfBankUser(int idBank){
+        this.arrayOfIdBanks.add(idBank);
+    }
+
 
     public String getPlaceOfWork() {
         return placeOfWork;

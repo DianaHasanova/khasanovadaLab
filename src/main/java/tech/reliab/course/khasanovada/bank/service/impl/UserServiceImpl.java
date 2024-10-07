@@ -8,14 +8,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class UserServiceImpl implements UserService {
-    ArrayList<User> users = new ArrayList<>();
+    BankServiceImpl bankService;
+
+    public UserServiceImpl(BankServiceImpl bankService) {
+        this.bankService = bankService;
+    }
 
     @Override
-    public User createUser(String fullName, String dateOfBirth, String placeOfWork, ArrayList<Integer> arrayOfIdBanks,
-                           BankServiceImpl bankService) {
+    public User createUser(String fullName, String dateOfBirth, String placeOfWork, ArrayList<Integer> arrayOfIdBanks) {
         User user = new User();
-        user.setId(users.size());
-        users.add(user);
+        user.setId(bankService.users.size());
+        bankService.users.add(user);
 
         user.setFullName(fullName);
         user.setDateOfBirth(dateOfBirth);
@@ -23,7 +26,7 @@ public class UserServiceImpl implements UserService {
         int salaryAmount = givesRandomSalaryAmount();
         user.setSalaryAmount(salaryAmount);
         user.setArrayOfIdBanks(arrayOfIdBanks);
-        addUserToBanks(arrayOfIdBanks, bankService);
+        addUserToBanks(arrayOfIdBanks);
         user.setCreditRatingForBank(givesRandomRating(salaryAmount));
         return user;
     }
@@ -43,11 +46,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUserToBanks(ArrayList<Integer> arrayOfIdBanks, BankServiceImpl bankService) {
+    public void addUserToBanks(ArrayList<Integer> arrayOfIdBanks) {
         for (int idBank : arrayOfIdBanks) {
             Bank bank = bankService.givesBankById(idBank);
             bankService.addUser(bank);
         }
+    }
+
+    public void addBankOfListUser(User user, int idBank){
+        user.addIdBankInArrayBanksOfBankUser(idBank);
+        Bank bank = bankService.givesBankById(idBank);
+        bankService.addUser(bank);
     }
 
     public void addUser(Bank bank) {
@@ -56,7 +65,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User givesUserById(int idUser) {
-        for (User user : users)
+        for (User user : bankService.users)
             if (user.getId() == idUser)
                 return user;
         return null;
@@ -80,7 +89,7 @@ public class UserServiceImpl implements UserService {
     public String toString() {
         String str = "UserServiceImpl{\n";
         int indexDelete = 0;
-        for (User user : users) {
+        for (User user : bankService.users) {
             str += "indexDelete = " + indexDelete++ + " ";
             str += user.toString() + "\n";
         }

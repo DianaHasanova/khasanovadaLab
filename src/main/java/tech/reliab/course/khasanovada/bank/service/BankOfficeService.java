@@ -8,7 +8,7 @@ public interface BankOfficeService {
     /* создание офиса */
     public BankOffice createOffice(String name, String address, int idBank, boolean isStatusOfJob,
                                    boolean canAtmPlacement, boolean canGetLoan, boolean canTakeMoney,
-                                   boolean canDepositAllowed, int costOfRent, BankServiceImpl bankService );
+                                   boolean canDepositAllowed, int costOfRent );
 
     /* увеличивает количество банковских автоматов на 1 в офисе*/
     public void addAtm(BankOffice office);
