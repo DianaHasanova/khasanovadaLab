@@ -70,7 +70,7 @@ public class CreateRandomObjects {
     public void createPaymentAccount(int numberOfPaymentAccount) {
         for (var user:bankService.getUsers()){
             int idUser = user.getId();
-            int idBank = user.getArrayOfIdBanks().getFirst();
+            int idBank = user.getArrayOfIdBanks().get(0);
             for (int i = 0; i < numberOfPaymentAccount; i++)
                 paymentAccountService.createPaymentAccount(idUser, idBank);
         }
@@ -79,8 +79,8 @@ public class CreateRandomObjects {
     public void createCreditAccount(int numberOfCreditAccount) {
         for (var user:bankService.getUsers()){
             int idUser = user.getId();
-            int idBank = user.getArrayOfIdBanks().getFirst();
-            int idPaymentAccount = user.getArrayOfIdPaymentAccounts().getFirst();
+            int idBank = user.getArrayOfIdBanks().get(0);
+            int idPaymentAccount = user.getArrayOfIdPaymentAccounts().get(0);
             var random = new Random();
             for (int i = 0; i < numberOfCreditAccount; i++) {
                 String startDate =generateRandomDate("01-01-2024", "01-01-2074");
